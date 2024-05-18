@@ -11,11 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^30.0.6",
-    "electron-builder": "^24.13.3"
+    "electron": "^30.0.6"
   },
   "dependencies": {
-    "electron-reload": "^2.0.0-alpha.1",
     "toastify-js": "^1.12.0"
   }
 }
