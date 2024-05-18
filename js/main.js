@@ -14,30 +14,7 @@ const createWindow = () => {
 
   window.loadFile("./main.html");
 
-  const menu = new Menu.buildFromTemplate([
-    {
-      label: "TodoApp",
-      submenu: [
-        {
-          label: "Yenile",
-          role: "reload",
-        },
-        {
-          label: "versiyon",
-          role: "about",
-        },
-        {
-          label: "Çıkış",
-          role: "quit",
-        },
-        {
-          label: "Geliştirici",
-          role: "toggleDevTools",
-        },
-      ],
-    },
-  ]);
-  Menu.setApplicationMenu(menu);
+  Menu.setApplicationMenu(null);
 };
 
 app.whenReady().then(createWindow);
