@@ -61,26 +61,33 @@ function addTodo(e) {
 
 function del(e) {
   const item = e.target;
-  if (item.classList.contains("deleteBtn")) {
+
+  //? delete Todo
+  if (item.classList[0] === "deleteBtn") {
     const todo = item.parentElement;
     todo.classList.add("fall");
-    remobeLocalStorage(todo.querySelector(".todoText").innerText);
+    removeLocalStorage(todo);
     todo.addEventListener("transitionend", function () {
       todo.remove();
     });
+    Toastify({
+      text: "Todo Silindi.",
+      position: "center",
+      style: {
+        fontFamily: "sans-serif",
+        fontWeight: 600,
+      },
+      backgroundColor: "#e65a09",
+      duration: 3000,
+    }).showToast();
   }
-  Toastify({
-    text: "Todo Silindi.",
-    position: "center",
-    style: {
-      fontFamily: "sans-serif",
-      fontWeight: 600,
-    },
-    backgroundColor: "#e65a09",
-    duration: 3000,
-  }).showToast();
-}
 
+  //? check
+  if (item.classList[0] === "checkBtn") {
+    const todo = item.parentElement;
+    todo.classList.toggle("completed");
+  }
+}
 function filterTodo(e) {
   const todos = todoList.childNodes;
   todos.forEach(function (item) {
@@ -121,7 +128,8 @@ function getTodos() {
   let todos;
   if (localStorage.getItem("todoText") === null) {
     todos = [];
-  } else {
+  }
+  {
     todos = JSON.parse(localStorage.getItem("todoText"));
   }
   todos.forEach((todo) => {
@@ -147,14 +155,15 @@ function getTodos() {
   });
 }
 
-function remobeLocalStorage(todoText) {
+function removeLocalStorage(todo) {
   let todos;
   if (localStorage.getItem("todoText") === null) {
     todos = [];
   } else {
     todos = JSON.parse(localStorage.getItem("todoText"));
   }
-  const todoIndex = todos.indexOf(todoText);
+  const todoMetin = todo.querySelector(".todoText").innerText;
+  const todoIndex = todos.indexOf(todoMetin);
   if (todoIndex !== -1) {
     todos.splice(todoIndex, 1);
     localStorage.setItem("todoText", JSON.stringify(todos));
